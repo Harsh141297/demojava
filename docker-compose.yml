@@ -5,8 +5,20 @@ services:
         build:
             dockerfile: Dockerfile
             context: .
+        volumes:
+            - 'myshare:/usr/local/lib/'
+
     tomcat:
         restart: always
-        image: tomcat
-        ports:
-          - '7879:7879'
+        build:
+            dockerfile: Dockerfile2
+            context: .
+        #image: tomcat
+        #ports:
+        #  - '8080:8080'
+        volumes:
+          - 'myshare:/usr/local/tomcat/webapps/'
+
+volumes:
+  myshare:
+    driver: local 
